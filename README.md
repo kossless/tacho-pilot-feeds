@@ -18,4 +18,5 @@ Per country (ISO code), all optional:
 }}
 ```
 
+Publish by copying `bans.json` to the public repo `kossless/tacho-pilot-feeds` (branch `main`) and pushing.
 Check the result with `cd Packages/KabinaCore && swift test` and a decode of the file before publishing.
