@@ -156,7 +156,9 @@
     }
     document.documentElement.classList.add("js");
     show(pick());
-    window.addEventListener("hashchange", function () { show(pick()); });
+    // Language links switch the text instead of jumping down to it.
+    window.addEventListener("load", function () { window.scrollTo(0, 0); });
+    window.addEventListener("hashchange", function () { show(pick()); window.scrollTo(0, 0); });
   })();
 </script>
 </body>
