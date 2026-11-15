@@ -48,13 +48,13 @@
   </header>
 
   <nav class="langs">
-    <a href="#ru" data-l="ru">Русский</a>
-    <a href="#uk" data-l="uk">Українська</a>
-    <a href="#pl" data-l="pl">Polski</a>
-    <a href="#en" data-l="en">English</a>
+    <a href="?l=ru" data-l="ru">Русский</a>
+    <a href="?l=uk" data-l="uk">Українська</a>
+    <a href="?l=pl" data-l="pl">Polski</a>
+    <a href="?l=en" data-l="en">English</a>
   </nav>
 
-  <section class="lang" id="ru" lang="ru">
+  <section class="lang" data-l="ru" lang="ru">
     <h2>Политика конфиденциальности</h2>
     <p class="date">Действует с 15 ноября 2026 г.</p>
     <div class="item"><h3>Ваши данные остаются на телефоне</h3>
@@ -75,7 +75,7 @@
       <p>Константин Головко. Если политика изменится, новая версия появится на этой странице.</p></div>
   </section>
 
-  <section class="lang" id="uk" lang="uk">
+  <section class="lang" data-l="uk" lang="uk">
     <h2>Політика конфіденційності</h2>
     <p class="date">Діє з 15 листопада 2026 р.</p>
     <div class="item"><h3>Ваші дані залишаються на телефоні</h3>
@@ -96,7 +96,7 @@
       <p>Костянтин Головко. Якщо політика зміниться, нова версія з’явиться на цій сторінці.</p></div>
   </section>
 
-  <section class="lang" id="pl" lang="pl">
+  <section class="lang" data-l="pl" lang="pl">
     <h2>Polityka prywatności</h2>
     <p class="date">Obowiązuje od 15 listopada 2026 r.</p>
     <div class="item"><h3>Twoje dane zostają w telefonie</h3>
@@ -117,7 +117,7 @@
       <p>Kostiantyn Holovko. Jeśli polityka się zmieni, nowa wersja pojawi się na tej stronie.</p></div>
   </section>
 
-  <section class="lang" id="en" lang="en">
+  <section class="lang" data-l="en" lang="en">
     <h2>Privacy Policy</h2>
     <p class="date">Effective 15 November 2026</p>
     <div class="item"><h3>Your data stays on your phone</h3>
@@ -144,21 +144,18 @@
   (function () {
     var langs = ["ru", "uk", "pl", "en"];
     function pick() {
-      var h = location.hash.slice(1);
-      if (langs.indexOf(h) >= 0) return h;
+      var q = new URLSearchParams(location.search).get("l");
+      if (langs.indexOf(q) >= 0) return q;
       var n = (navigator.language || "en").slice(0, 2).toLowerCase();
       return langs.indexOf(n) >= 0 ? n : "en";
     }
     function show(l) {
-      document.querySelectorAll("section.lang").forEach(function (s) { s.classList.toggle("on", s.id === l); });
+      document.querySelectorAll("section.lang").forEach(function (s) { s.classList.toggle("on", s.dataset.l === l); });
       document.querySelectorAll(".langs a").forEach(function (a) { a.classList.toggle("on", a.dataset.l === l); });
       document.documentElement.lang = l;
     }
     document.documentElement.classList.add("js");
     show(pick());
-    // Language links switch the text instead of jumping down to it.
-    window.addEventListener("load", function () { window.scrollTo(0, 0); });
-    window.addEventListener("hashchange", function () { show(pick()); window.scrollTo(0, 0); });
   })();
 </script>
 </body>
