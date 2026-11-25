@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,225 +8,154 @@
 <meta name="description" content="Contact Tacho Pilot support and find help with automatic driving detection, tachograph connection, and backups.">
 <style>
   :root {
-    color-scheme: light dark;
-    --background: #f5f6f8;
-    --surface: #fff;
-    --text: #15171c;
-    --muted: #505968;
-    --accent: #214fb1;
-    --line: #d9dfe9;
-    --selected: #e9efff;
+    --bg: #f5f6f8; --card: #ffffff; --text: #15171c; --muted: #5b6270;
+    --accent: #2f6fe4; --line: #e3e6eb;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #0b0d12;
-      --surface: #161a22;
-      --text: #eef0f4;
-      --muted: #b2bbca;
-      --accent: #a4bdff;
-      --line: #343c4b;
-      --selected: #243451;
-    }
+    :root { --bg: #0b0d12; --card: #161a22; --text: #eef0f4; --muted: #9aa3b2; --accent: #6b9bff; --line: #262c38; }
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--background);
-    color: var(--text);
+    margin: 0; background: var(--bg); color: var(--text);
     font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
-  .page { max-width: 46rem; margin-inline: auto; padding: clamp(1.25rem, 4vw, 2.5rem) 1.125rem 3rem; }
-  .site-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
-  .brand { display: flex; align-items: center; gap: .75rem; font-size: 26px; font-weight: 700; }
-  .logo {
-    display: grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: .6875rem;
-    background: linear-gradient(135deg, #2459c5, #793ab9);
-    color: #fff;
-    font-size: 18px;
-    font-weight: 800;
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .logo { width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(135deg, #2f6fe4, #8a4fe8);
+          display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px; }
+  h1 { font-size: 26px; margin: 0; }
+  .langs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 24px; }
+  .langs a {
+    padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card);
+    color: var(--text); text-decoration: none; font-size: 14px;
   }
-  nav { display: flex; flex-wrap: wrap; gap: .375rem; }
-  nav a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding-inline: .625rem;
-    border-radius: .5rem;
-    color: var(--muted);
-    font-size: 14px;
-    text-decoration: none;
-  }
-  nav a[aria-current] { background: var(--selected); color: var(--accent); }
-  nav a:hover { text-decoration: underline; }
-  a { color: var(--accent); text-underline-offset: .17em; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-  article { margin-top: clamp(1.5rem, 5vw, 3rem); }
-  h1 { font-size: 20px; margin: 0 0 .5rem; }
-  h2 { font-size: 16px; margin: 0 0 .5rem; }
-  p { margin: 0; }
-  .contact {
-    padding: clamp(1rem, 4vw, 1.75rem);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-  }
+  .langs a.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.lang + section.lang { margin-top: 48px; }
+  .js section.lang { display: none; }
+  .js section.lang.on { display: block; }
+  h2 { font-size: 20px; margin: 0 0 4px; }
+  .date { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; margin: 12px 0; }
+  .item h3 { font-size: 16px; margin: 0 0 6px; }
+  .item p { margin: 0; color: var(--muted); }
+  footer { margin-top: 40px; color: var(--muted); font-size: 14px; }
+  .item .intro { color: var(--text); }
+  .item .tip { margin-top: 12px; }
   .email {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding: .375rem .6875rem;
-    margin-top: .75rem;
-    max-width: 100%;
-    border-radius: .5rem;
-    background: var(--selected);
-    font-weight: 700;
-    overflow-wrap: anywhere;
+    display: inline-block; margin-top: 12px; padding: 8px 14px; border-radius: 999px;
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; overflow-wrap: anywhere;
   }
-  .message-tip { color: var(--muted); margin-top: .875rem; }
-  .faq { margin-top: 1.75rem; }
-  details { border-bottom: 1px solid var(--line); }
-  summary { cursor: pointer; min-height: 2.75rem; padding: .65rem 0; font-weight: 700; }
-  details p { color: var(--muted); padding-bottom: .875rem; }
-  footer { margin-top: 1.625rem; font-size: 14px; }
-  footer a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+  h2.faq { margin: 32px 0 4px; }
+  details.item summary { cursor: pointer; list-style: none; font-weight: 700; display: flex; gap: 10px; justify-content: space-between; }
+  details.item summary::-webkit-details-marker { display: none; }
+  details.item summary::after { content: "+"; color: var(--muted); font-weight: 400; }
+  details.item[open] summary::after { content: "\2212"; }
+  details.item p { margin-top: 6px; }
+  .more { margin: 20px 0 0; font-size: 14px; }
+  .more a { color: var(--accent); }
 </style>
 </head>
 <body>
-<div class="page">
-  <header class="site-header">
-    <div class="brand"><span class="logo" aria-hidden="true">TP</span> Tacho Pilot</div>
-    <nav aria-label="Language">
-      <a href="?l=ru" lang="ru" hreflang="ru" data-language="ru">Русский</a>
-      <a href="?l=uk" lang="uk" hreflang="uk" data-language="uk">Українська</a>
-      <a href="?l=pl" lang="pl" hreflang="pl" data-language="pl">Polski</a>
-      <a href="?l=en" lang="en" hreflang="en" data-language="en">English</a>
-    </nav>
+<main>
+  <header>
+    <div class="logo">TP</div>
+    <h1>Tacho Pilot</h1>
   </header>
 
-  <main>
-    <article lang="en" data-support-language>
-      <section class="contact">
-        <h1>Support</h1>
-        <p>Need help with Tacho Pilot or want to report a problem? Email us.</p>
-        <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
-        <p class="message-tip">Tell us what you were doing, what happened, and which iPhone and app version you use. In Tacho Pilot, go to Settings and look for Version under About. If you attach a screenshot, cover any personal details.</p>
-      </section>
-      <section class="faq" aria-labelledby="faq-en">
-        <h2 id="faq-en">Quick help</h2>
-        <details>
-          <summary>Driving isn’t detected when my phone is locked</summary>
-          <p>In Tacho Pilot, open Settings and check that automatic driving detection is on. Under Location, check that the app is allowed to use your location Always. If you prefer, you can record driving and rest manually.</p>
-        </details>
-        <details>
-          <summary>My tachograph won’t connect</summary>
-          <p>On your iPhone, check that Bluetooth is on and that Tacho Pilot can use it. In the app, go to Settings, open Tachograph and tap Search. If the devices ask for a pairing code, check that both show the same number. If the problem persists, send us the tachograph model and the status shown in the app.</p>
-        </details>
-        <details>
-          <summary>How do I back up my log?</summary>
-          <p>In Tacho Pilot, go to Settings, find the Data section and tap Back up. Save the file somewhere you can access later, such as iCloud Drive. Use Restore from backup on your new iPhone and select that file. Restoring replaces the app data on that iPhone.</p>
-        </details>
-      </section>
-      <footer><a href="../privacy/?l=en">Privacy policy</a></footer>
-    </article>
+  <nav class="langs">
+    <a href="?l=ru" data-l="ru">Русский</a>
+    <a href="?l=uk" data-l="uk">Українська</a>
+    <a href="?l=pl" data-l="pl">Polski</a>
+    <a href="?l=en" data-l="en">English</a>
+  </nav>
 
-    <article lang="ru" data-support-language>
-      <section class="contact">
-        <h1>Поддержка</h1>
-        <p>Напишите нам, если нужна помощь с Tacho Pilot или вы заметили ошибку.</p>
-        <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
-        <p class="message-tip">Расскажите, что вы делали и что произошло. Укажите модель iPhone и версию Tacho Pilot. Номер версии есть в настройках приложения, в разделе «О приложении». Если прикладываете скриншот, скройте личные данные.</p>
-      </section>
-      <section class="faq" aria-labelledby="faq-ru">
-        <h2 id="faq-ru">Быстрая помощь</h2>
-        <details>
-          <summary>Приложение не определяет езду при блокировке iPhone</summary>
-          <p>В настройках Tacho Pilot проверьте, включено ли «Автоматическое определение вождения». В разделе «Геолокация» убедитесь, что у приложения есть доступ «Всегда». Вождение и отдых можно отмечать вручную.</p>
-        </details>
-        <details>
-          <summary>Тахограф не подключается</summary>
-          <p>Проверьте, включён ли Bluetooth на iPhone и разрешён ли доступ для Tacho Pilot. В настройках приложения откройте «Тахограф» и нажмите «Искать». Если появится код сопряжения, сравните его на iPhone и тахографе. Если подключиться не удалось, пришлите модель тахографа и статус, который показывает приложение.</p>
-        </details>
-        <details>
-          <summary>Как сохранить резервную копию журнала?</summary>
-          <p>В настройках Tacho Pilot в разделе «Данные» выберите «Резервная копия». Сохраните файл там, где сможете открыть его позже, например в iCloud Drive. На новом iPhone выберите «Восстановить из копии» и укажите сохранённый файл. Восстановление заменит данные приложения на этом iPhone.</p>
-        </details>
-      </section>
-      <footer><a href="../privacy/?l=ru">Политика конфиденциальности</a></footer>
-    </article>
+  <section class="lang" data-l="ru" lang="ru">
+    <h2>Поддержка</h2>
+    <div class="item">
+      <p class="intro">Напишите нам, если нужна помощь с Tacho Pilot или вы заметили ошибку.</p>
+      <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
+      <p class="tip">Расскажите, что вы делали и что произошло. Укажите модель iPhone и версию Tacho Pilot. Номер версии есть в настройках приложения, в разделе «О приложении». Если прикладываете скриншот, скройте личные данные.</p></div>
+    <h2 class="faq">Быстрая помощь</h2>
+    <details class="item"><summary>Приложение не определяет езду при блокировке iPhone</summary>
+      <p>В настройках Tacho Pilot проверьте, включено ли «Автоматическое определение вождения». В разделе «Геолокация» убедитесь, что у приложения есть доступ «Всегда». Вождение и отдых можно отмечать вручную.</p></details>
+    <details class="item"><summary>Тахограф не подключается</summary>
+      <p>Проверьте, включён ли Bluetooth на iPhone и разрешён ли доступ для Tacho Pilot. В настройках приложения откройте «Тахограф» и нажмите «Искать». Если появится код сопряжения, сравните его на iPhone и тахографе. Если подключиться не удалось, пришлите модель тахографа и статус, который показывает приложение.</p></details>
+    <details class="item"><summary>Как сохранить резервную копию журнала?</summary>
+      <p>В настройках Tacho Pilot в разделе «Данные» выберите «Резервная копия». Сохраните файл там, где сможете открыть его позже, например в iCloud Drive. На новом iPhone выберите «Восстановить из копии» и укажите сохранённый файл. Восстановление заменит данные приложения на этом iPhone.</p></details>
+    <p class="more"><a href="../privacy/?l=ru">Политика конфиденциальности</a></p>
+  </section>
 
-    <article lang="uk" data-support-language>
-      <section class="contact">
-        <h1>Підтримка</h1>
-        <p>Потрібна допомога з Tacho Pilot чи хочете повідомити про проблему? Напишіть нам.</p>
-        <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
-        <p class="message-tip">Розкажіть, що ви робили і що сталося. Укажіть модель iPhone та версію Tacho Pilot. Версія вказана в розділі «Про застосунок» у налаштуваннях Tacho Pilot. Якщо додаєте знімок екрана, приховайте особисті дані.</p>
-      </section>
-      <section class="faq" aria-labelledby="faq-uk">
-        <h2 id="faq-uk">Швидка допомога</h2>
-        <details>
-          <summary>Застосунок не розпізнає керування, коли iPhone заблоковано</summary>
-          <p>У налаштуваннях Tacho Pilot перевірте, чи ввімкнено «Автоматичне визначення керування». У розділі «Геолокація» переконайтеся, що застосунок має доступ «Завжди». Керування та відпочинок можна позначати вручну.</p>
-        </details>
-        <details>
-          <summary>Тахограф не підключається</summary>
-          <p>Перевірте, чи ввімкнено Bluetooth на iPhone та чи має Tacho Pilot доступ до нього. У налаштуваннях застосунку відкрийте «Тахограф» і натисніть «Шукати». Якщо з’явиться код сполучення, звірте його на iPhone і тахографі. Якщо підключитися не вдалося, надішліть модель тахографа та стан, який показує застосунок.</p>
-        </details>
-        <details>
-          <summary>Як зберегти резервну копію журналу?</summary>
-          <p>У налаштуваннях Tacho Pilot у розділі «Дані» виберіть «Резервна копія». Збережіть файл там, де зможете відкрити його згодом, наприклад в iCloud Drive. На новому iPhone виберіть «Відновити з копії» та вкажіть збережений файл. Відновлення замінить дані застосунку на цьому iPhone.</p>
-        </details>
-      </section>
-      <footer><a href="../privacy/?l=uk">Політика конфіденційності</a></footer>
-    </article>
+  <section class="lang" data-l="uk" lang="uk">
+    <h2>Підтримка</h2>
+    <div class="item">
+      <p class="intro">Потрібна допомога з Tacho Pilot чи хочете повідомити про проблему? Напишіть нам.</p>
+      <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
+      <p class="tip">Розкажіть, що ви робили і що сталося. Укажіть модель iPhone та версію Tacho Pilot. Версія вказана в розділі «Про застосунок» у налаштуваннях Tacho Pilot. Якщо додаєте знімок екрана, приховайте особисті дані.</p></div>
+    <h2 class="faq">Швидка допомога</h2>
+    <details class="item"><summary>Застосунок не розпізнає керування, коли iPhone заблоковано</summary>
+      <p>У налаштуваннях Tacho Pilot перевірте, чи ввімкнено «Автоматичне визначення керування». У розділі «Геолокація» переконайтеся, що застосунок має доступ «Завжди». Керування та відпочинок можна позначати вручну.</p></details>
+    <details class="item"><summary>Тахограф не підключається</summary>
+      <p>Перевірте, чи ввімкнено Bluetooth на iPhone та чи має Tacho Pilot доступ до нього. У налаштуваннях застосунку відкрийте «Тахограф» і натисніть «Шукати». Якщо з’явиться код сполучення, звірте його на iPhone і тахографі. Якщо підключитися не вдалося, надішліть модель тахографа та стан, який показує застосунок.</p></details>
+    <details class="item"><summary>Як зберегти резервну копію журналу?</summary>
+      <p>У налаштуваннях Tacho Pilot у розділі «Дані» виберіть «Резервна копія». Збережіть файл там, де зможете відкрити його згодом, наприклад в iCloud Drive. На новому iPhone виберіть «Відновити з копії» та вкажіть збережений файл. Відновлення замінить дані застосунку на цьому iPhone.</p></details>
+    <p class="more"><a href="../privacy/?l=uk">Політика конфіденційності</a></p>
+  </section>
 
-    <article lang="pl" data-support-language>
-      <section class="contact">
-        <h1>Pomoc</h1>
-        <p>Potrzebujesz pomocy z Tacho Pilot lub chcesz zgłosić problem? Napisz do nas.</p>
-        <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
-        <p class="message-tip">Napisz, co robiłeś i co się stało. Podaj model iPhone’a oraz wersję Tacho Pilot. Numer wersji znajdziesz w ustawieniach Tacho Pilot, w sekcji „O aplikacji”. Jeśli załączasz zrzut ekranu, zasłoń dane osobowe.</p>
-      </section>
-      <section class="faq" aria-labelledby="faq-pl">
-        <h2 id="faq-pl">Szybka pomoc</h2>
-        <details>
-          <summary>Aplikacja nie wykrywa jazdy przy zablokowanym iPhonie</summary>
-          <p>Sprawdź w ustawieniach Tacho Pilot, czy automatyczne wykrywanie jazdy jest włączone. W sekcji lokalizacji sprawdź, czy aplikacja ma dostęp „Zawsze”. Jazdę i odpoczynek możesz też rejestrować ręcznie.</p>
-        </details>
-        <details>
-          <summary>Tachograf się nie łączy</summary>
-          <p>Sprawdź, czy Bluetooth jest włączony na iPhonie i czy Tacho Pilot ma do niego dostęp. W ustawieniach aplikacji otwórz „Tachograf” i stuknij „Szukaj”. Jeśli pojawi się kod parowania, sprawdź, czy na iPhonie i tachografie jest taki sam. Jeśli połączenie nadal nie działa, podaj model tachografu i stan wyświetlany w aplikacji.</p>
-        </details>
-        <details>
-          <summary>Jak zrobić kopię zapasową dziennika?</summary>
-          <p>W ustawieniach Tacho Pilot w sekcji „Dane” wybierz „Kopia zapasowa”. Zapisz plik w miejscu, z którego możesz go później otworzyć, na przykład w iCloud Drive. Na nowym iPhonie wybierz „Przywróć z kopii” i wskaż zapisany plik. Przywrócenie zastąpi dane aplikacji na tym iPhonie.</p>
-        </details>
-      </section>
-      <footer><a href="../privacy/?l=pl">Polityka prywatności</a></footer>
-    </article>
-  </main>
-</div>
+  <section class="lang" data-l="pl" lang="pl">
+    <h2>Pomoc</h2>
+    <div class="item">
+      <p class="intro">Potrzebujesz pomocy z Tacho Pilot lub chcesz zgłosić problem? Napisz do nas.</p>
+      <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
+      <p class="tip">Napisz, co robiłeś i co się stało. Podaj model iPhone’a oraz wersję Tacho Pilot. Numer wersji znajdziesz w ustawieniach Tacho Pilot, w sekcji „O aplikacji”. Jeśli załączasz zrzut ekranu, zasłoń dane osobowe.</p></div>
+    <h2 class="faq">Szybka pomoc</h2>
+    <details class="item"><summary>Aplikacja nie wykrywa jazdy przy zablokowanym iPhonie</summary>
+      <p>Sprawdź w ustawieniach Tacho Pilot, czy automatyczne wykrywanie jazdy jest włączone. W sekcji lokalizacji sprawdź, czy aplikacja ma dostęp „Zawsze”. Jazdę i odpoczynek możesz też rejestrować ręcznie.</p></details>
+    <details class="item"><summary>Tachograf się nie łączy</summary>
+      <p>Sprawdź, czy Bluetooth jest włączony na iPhonie i czy Tacho Pilot ma do niego dostęp. W ustawieniach aplikacji otwórz „Tachograf” i stuknij „Szukaj”. Jeśli pojawi się kod parowania, sprawdź, czy na iPhonie i tachografie jest taki sam. Jeśli połączenie nadal nie działa, podaj model tachografu i stan wyświetlany w aplikacji.</p></details>
+    <details class="item"><summary>Jak zrobić kopię zapasową dziennika?</summary>
+      <p>W ustawieniach Tacho Pilot w sekcji „Dane” wybierz „Kopia zapasowa”. Zapisz plik w miejscu, z którego możesz go później otworzyć, na przykład w iCloud Drive. Na nowym iPhonie wybierz „Przywróć z kopii” i wskaż zapisany plik. Przywrócenie zastąpi dane aplikacji na tym iPhonie.</p></details>
+    <p class="more"><a href="../privacy/?l=pl">Polityka prywatności</a></p>
+  </section>
+
+  <section class="lang" data-l="en" lang="en">
+    <h2>Support</h2>
+    <div class="item">
+      <p class="intro">Need help with Tacho Pilot or want to report a problem? Email us.</p>
+      <a class="email" href="mailto:tachopilot.support@gmail.com?subject=Tacho%20Pilot">tachopilot.support@gmail.com</a>
+      <p class="tip">Tell us what you were doing, what happened, and which iPhone and app version you use. In Tacho Pilot, go to Settings and look for Version under About. If you attach a screenshot, cover any personal details.</p></div>
+    <h2 class="faq">Quick help</h2>
+    <details class="item"><summary>Driving isn’t detected when my phone is locked</summary>
+      <p>In Tacho Pilot, open Settings and check that automatic driving detection is on. Under Location, check that the app is allowed to use your location Always. If you prefer, you can record driving and rest manually.</p></details>
+    <details class="item"><summary>My tachograph won’t connect</summary>
+      <p>On your iPhone, check that Bluetooth is on and that Tacho Pilot can use it. In the app, go to Settings, open Tachograph and tap Search. If the devices ask for a pairing code, check that both show the same number. If the problem persists, send us the tachograph model and the status shown in the app.</p></details>
+    <details class="item"><summary>How do I back up my log?</summary>
+      <p>In Tacho Pilot, go to Settings, find the Data section and tap Back up. Save the file somewhere you can access later, such as iCloud Drive. Use Restore from backup on your new iPhone and select that file. Restoring replaces the app data on that iPhone.</p></details>
+    <p class="more"><a href="../privacy/?l=en">Privacy policy</a></p>
+  </section>
+
+  <footer>© 2026 Kostiantyn Holovko · Tacho Pilot</footer>
+</main>
 <script>
-  const pages = Array.from(document.querySelectorAll("[data-support-language]"));
-  const links = Array.from(document.querySelectorAll("[data-language]"));
-  const preferred = new URLSearchParams(location.search).get("l");
-  const browser = navigator.language.split("-")[0].toLowerCase();
-  const selected = [preferred, browser, "en"].find(language => pages.some(page => page.lang === language));
-  const navigationLabels = { en: "Language", ru: "Язык", uk: "Мова", pl: "Język" };
-
-  document.documentElement.lang = selected;
-  document.querySelector("nav").setAttribute("aria-label", navigationLabels[selected]);
-
-  for (const page of pages) {
-    page.hidden = page.lang !== selected;
-    if (!page.hidden) document.title = `Tacho Pilot — ${page.querySelector("h1").textContent}`;
-  }
-  for (const link of links) {
-    if (link.dataset.language === selected) link.setAttribute("aria-current", "page");
-  }
+  (function () {
+    var langs = ["ru", "uk", "pl", "en"];
+    function pick() {
+      var q = new URLSearchParams(location.search).get("l");
+      if (langs.indexOf(q) >= 0) return q;
+      var n = (navigator.language || "en").slice(0, 2).toLowerCase();
+      return langs.indexOf(n) >= 0 ? n : "en";
+    }
+    function show(l) {
+      document.querySelectorAll("section.lang").forEach(function (s) {
+        var on = s.dataset.l === l;
+        s.classList.toggle("on", on);
+        if (on) document.title = "Tacho Pilot — " + s.querySelector("h2").textContent;
+      });
+      document.querySelectorAll(".langs a").forEach(function (a) { a.classList.toggle("on", a.dataset.l === l); });
+      document.documentElement.lang = l;
+    }
+    document.documentElement.classList.add("js");
+    show(pick());
+  })();
 </script>
 </body>
 </html>
