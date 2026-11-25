@@ -2,12 +2,17 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-title" content="Tacho Pilot">
 <title>Tacho Pilot — Support</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' rx='11' fill='%23214fb1'/%3E%3Ctext x='22' y='28' fill='white' font-family='sans-serif' font-size='17' font-weight='bold' text-anchor='middle'%3ETP%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Contact Tacho Pilot support and find help with automatic driving detection, tachograph connection, and backups.">
 <style>
   :root {
+    color-scheme: light dark;
     --bg: #f5f6f8; --card: #ffffff; --text: #15171c; --muted: #5b6270;
     --accent: #2f6fe4; --line: #e3e6eb;
   }
@@ -15,44 +20,58 @@
     :root { --bg: #0b0d12; --card: #161a22; --text: #eef0f4; --muted: #9aa3b2; --accent: #6b9bff; --line: #262c38; }
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+  @supports (font: -apple-system-body) { html { font: -apple-system-body; } }
   body {
     margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font: 1rem/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
-  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  main {
+    max-width: 720px; margin: 0 auto;
+    padding: max(32px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+             calc(64px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  }
+  p { overflow-wrap: break-word; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
   .logo { width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(135deg, #2f6fe4, #8a4fe8);
           display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px; }
-  h1 { font-size: 26px; margin: 0; }
+  h1 { font-size: 1.625rem; margin: 0; }
   .langs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 24px; }
   .langs a {
-    padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card);
-    color: var(--text); text-decoration: none; font-size: 14px;
+    display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+    padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card);
+    color: var(--text); text-decoration: none; font-size: .875rem;
   }
+  .langs a:active { opacity: .7; }
+  @media (max-width: 600px) { .langs { gap: 6px; } .langs a { flex: 1 1 auto; padding: 0 10px; } }
+  @media (max-width: 360px) { .langs { display: grid; grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 360px) { .email { font-size: .875rem; padding: 8px 12px; } }
   .langs a.on { background: var(--accent); border-color: var(--accent); color: #fff; }
   section.lang + section.lang { margin-top: 48px; }
   .js section.lang { display: none; }
   .js section.lang.on { display: block; }
-  h2 { font-size: 20px; margin: 0 0 4px; }
-  .date { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+  h2 { font-size: 1.25rem; margin: 0 0 4px; }
+  .date { color: var(--muted); font-size: .875rem; margin: 0 0 20px; }
   .item { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; margin: 12px 0; }
-  .item h3 { font-size: 16px; margin: 0 0 6px; }
+  .item h3 { font-size: 1rem; margin: 0 0 6px; }
   .item p { margin: 0; color: var(--muted); }
-  footer { margin-top: 40px; color: var(--muted); font-size: 14px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: .875rem; }
   .item .intro { color: var(--text); }
   .item .tip { margin-top: 12px; }
   .email {
-    display: inline-block; margin-top: 12px; padding: 8px 14px; border-radius: 999px;
+    display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; margin-top: 12px; padding: 8px 16px; border-radius: 999px;
     background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; overflow-wrap: anywhere;
   }
   h2.faq { margin: 32px 0 4px; }
+  details.item summary:active { opacity: .7; }
   details.item summary { cursor: pointer; list-style: none; font-weight: 700; display: flex; gap: 10px; justify-content: space-between; }
   details.item summary::-webkit-details-marker { display: none; }
   details.item summary::after { content: "+"; color: var(--muted); font-weight: 400; }
   details.item[open] summary::after { content: "\2212"; }
   details.item p { margin-top: 6px; }
-  .more { margin: 20px 0 0; font-size: 14px; }
-  .more a { color: var(--accent); }
+  .more { margin: 12px 0 0; font-size: .875rem; }
+  .more a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); }
 </style>
 </head>
 <body>
